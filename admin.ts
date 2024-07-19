@@ -2,7 +2,6 @@ import AdminJSExpress from '@adminjs/express';
 import {Database, getModelByName, Resource} from '@adminjs/prisma';
 import {type PrismaClient} from '@prisma/client';
 import {AdminJS, type AdminJSOptions} from 'adminjs';
-import {componentLoader, Components} from './admin/components/components.js';
 
 const ADMIN_BASE_URL = 'http://localhost:8080';
 const ADMIN_BASE_PATH = '/admin';
@@ -21,7 +20,6 @@ export const buildAdmin = (prismaClient: PrismaClient) => {
     rootPath: new URL(ADMIN_BASE_URL + ADMIN_BASE_PATH).pathname,
     loginPath: new URL(ADMIN_BASE_URL + ADMIN_BASE_PATH + '/login').pathname,
     logoutPath: new URL(ADMIN_BASE_URL + ADMIN_BASE_PATH + '/logout').pathname,
-    componentLoader,
     resources: [
       {
         resource: {
@@ -31,10 +29,7 @@ export const buildAdmin = (prismaClient: PrismaClient) => {
         options: {
           properties: {
             previewData: {
-              components: {
-                show: Components.RenderJSON,
-              },
-              // type: 'key-value',
+              type: 'key-value',
             },
           },
         },
